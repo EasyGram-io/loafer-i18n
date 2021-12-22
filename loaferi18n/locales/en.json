@@ -1,0 +1,13 @@
+{
+  "%s extract [path] [outfile]": "%s extract [path] [outfile]",
+  "%s generate [path] [outfile]": "%s generate [path] [outfile]",
+  "%s update srcfile destfile": "%s update srcfile destfile",
+  "a tool for managing message translations.": "a tool for managing message translations.",
+  "destfile cannot be empty": "destfile cannot be empty",
+  "extracts strings to be translated from code": "extracts strings to be translated from code",
+  "generated go file package name": "generated go file package name",
+  "generates code to insert translated messages": "generates code to insert translated messages",
+  "merge translations and generate catalog": "merge translations and generate catalog",
+  "package name": "package name",
+  "srcfile cannot be empty": "srcfile cannot be empty"
+}

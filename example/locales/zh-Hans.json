@@ -1,0 +1,11 @@
+{
+  "%s has %d cat.": "%s有%d只猫。",
+  "%s has %d cats.": "%s有%d只猫。",
+  "%s have %d apple.": "%s have %d apple.",
+  "%s have %d apples.": "%s有%d个苹果。",
+  "%s have an apple.": "%s有一个苹果。",
+  "%s have two apples.": "%s有两个苹果。",
+  "hello %s!": "你好，%s！",
+  "hello world!": "你好，世界！",
+  "hello world.": "你好，世界。"
+}
