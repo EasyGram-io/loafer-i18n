@@ -55,7 +55,6 @@ func Extract(packName string, paths []string, outFile string) error {
 				i18NPackName = packName
 			}
 
-			//ast.Print(fset, file)
 			ast.Inspect(file, func(n ast.Node) bool {
 				switch v := n.(type) {
 				case *ast.CallExpr:
@@ -84,17 +83,43 @@ func Extract(packName string, paths []string, outFile string) error {
 						if len(packName) > 0 && i18NPackName == packName {
 							// Function name must be equal
 							if funcName == "Printf" || funcName == "Sprintf" || funcName == "Fprintf" {
+								id := ""
+								domain := ""
+								// get domain
+								for _, expr := range v.Args {
+									if cv, ok := expr.(*ast.CompositeLit); ok {
+										if cvt, ok := cv.Type.(*ast.SelectorExpr); ok {
+											if pack, ok := cvt.X.(*ast.Ident); ok {
+												if pack.Name == "i18n" && cvt.Sel.Name == "Domain" {
+													// 读取 domain
+													if dv, ok := cv.Elts[0].(*ast.BasicLit); ok {
+														domain = strings.Trim(dv.Value, "`")
+														domain = strings.Trim(domain, `"`)
+													} else if kv, ok := cv.Elts[0].(*ast.KeyValueExpr); ok {
+														if dv, ok := kv.Value.(*ast.BasicLit); ok {
+															domain = strings.Trim(dv.Value, "`")
+															domain = strings.Trim(domain, `"`)
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+
 								// Find the string to be translated
 								if str, ok := v.Args[0].(*ast.BasicLit); ok {
-									id := trim(str.Value)
-									if _, ok := messages[id]; !ok {
-										messages[id] = id
-									}
-									fmt.Printf("Extract %+v %v.%v => %s\n", namePos, packName, funcName, id)
+									id = trim(str.Value)
 								} else if str, ok := v.Args[1].(*ast.BasicLit); ok {
-									id := trim(str.Value)
+									id = trim(str.Value)
+								}
+								if id != "" {
+									value := id
+									if domain != "" {
+										id = fmt.Sprintf("%s: %s", domain, id)
+									}
 									if _, ok := messages[id]; !ok {
-										messages[id] = id
+										messages[id] = value
 									}
 									fmt.Printf("Extract %+v %v.%v => %s\n", namePos, packName, funcName, id)
 								}

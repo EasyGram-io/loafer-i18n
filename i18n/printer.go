@@ -1,6 +1,7 @@
 package i18n
 
 import (
+	"fmt"
 	"io"
 	"regexp"
 	"strconv"
@@ -22,6 +23,11 @@ type PluralRule struct {
 	Expr  string
 	Value int
 	Text  string
+}
+
+// Domain is Domain
+type Domain struct {
+	K string
 }
 
 // Message is translation message
@@ -71,9 +77,9 @@ func preArgs(format string, args ...interface{}) (string, []interface{}) {
 	length := len(args)
 	if length > 0 {
 		lastArg := args[length-1]
-		switch lastArg.(type) {
+		switch v := lastArg.(type) {
 		case []PluralRule:
-			rules := lastArg.([]PluralRule)
+			rules := v
 			// parse rule
 			for _, rule := range rules {
 				curPosVal := args[rule.Pos-1].(int)
@@ -84,6 +90,9 @@ func preArgs(format string, args ...interface{}) (string, []interface{}) {
 				}
 			}
 			args = args[0:strings.Count(format, "%")]
+		case Domain:
+			format = fmt.Sprintf("%s: %s", v.K, format)
+			args = args[0 : length-1]
 		}
 	}
 	return format, args

@@ -26,6 +26,9 @@ func main() {
 	i18n.Printf(`hello world!`)
 	fmt.Println()
 
+	i18n.Printf(`hello world!`, i18n.Domain{`example`})
+	fmt.Println()
+
 	name := `EasyGram.io`
 
 	i18n.Printf(`hello %s!`, name)
