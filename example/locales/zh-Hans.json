@@ -5,7 +5,7 @@
   "%s have %d apples.": "%s有%d个苹果。",
   "%s have an apple.": "%s有一个苹果。",
   "%s have two apples.": "%s有两个苹果。",
-  "example: hello world!": "你好，我的世界！",
+  "example.hello world!": "你好，我的世界！",
   "hello %s!": "你好，%s！",
   "hello world!": "你好，世界！",
   "hello world.": "你好，世界。"

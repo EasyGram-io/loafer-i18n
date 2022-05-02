@@ -5,7 +5,7 @@
   "%s have %d apples.": "%s have %d apples.",
   "%s have an apple.": "%s have an apple.",
   "%s have two apples.": "%s have two apples.",
-  "example: hello world!": "hello world!",
+  "example.hello world!": "hello world!",
   "hello %s!": "hello %s!",
   "hello world!": "hello world!",
   "hello world.": "hello world."

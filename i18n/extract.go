@@ -116,7 +116,7 @@ func Extract(packName string, paths []string, outFile string) error {
 								if id != "" {
 									value := id
 									if domain != "" {
-										id = fmt.Sprintf("%s: %s", domain, id)
+										id = fmt.Sprintf("%s.%s", domain, id)
 									}
 									if _, ok := messages[id]; !ok {
 										messages[id] = value

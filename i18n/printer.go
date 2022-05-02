@@ -91,7 +91,7 @@ func preArgs(format string, args ...interface{}) (string, []interface{}) {
 			}
 			args = args[0:strings.Count(format, "%")]
 		case Domain:
-			format = fmt.Sprintf("%s: %s", v.K, format)
+			format = fmt.Sprintf("%s.%s", v.K, format)
 			args = args[0 : length-1]
 		}
 	}
